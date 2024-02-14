@@ -8,7 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
+import { CreateClientDto, UpdateClientDto } from './client.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('clients')
 @Controller('clients')
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
@@ -24,12 +27,12 @@ export class ClientsController {
   }
 
   @Post()
-  create(@Body() data: any) {
+  create(@Body() data: CreateClientDto) {
     return this.clientsService.create(data);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() data: any) {
+  update(@Param('id') id: string, @Body() data: UpdateClientDto) {
     return this.clientsService.update(+id, data);
   }
 

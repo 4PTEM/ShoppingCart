@@ -8,7 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CartItemsService } from './cart-items.service';
+import { CreateCartItemDto, UpdateCartItemDto } from './cart-item.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('cart-items')
 @Controller('cart-items')
 export class CartItemsController {
   constructor(private readonly cartItemsService: CartItemsService) {}
@@ -24,12 +27,12 @@ export class CartItemsController {
   }
 
   @Post()
-  create(@Body() data: any) {
+  create(@Body() data: CreateCartItemDto) {
     return this.cartItemsService.create(data);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() data: any) {
+  update(@Param('id') id: string, @Body() data: UpdateCartItemDto) {
     return this.cartItemsService.update(+id, data);
   }
 
